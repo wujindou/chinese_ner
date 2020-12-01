@@ -44,7 +44,7 @@ class Config:
         # train and eval
         self.learning_rate = 5e-4
         self.weight_decay = 0
-        self.num_epochs = 17
+        self.num_epochs =5 
         self.early_stop = False
         self.require_improvement = 200
         self.batch_to_out = 50

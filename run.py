@@ -20,6 +20,7 @@ def bilstm_train_eval(config,
     processor = DataProcessor(config.data_dir, config.do_lower_case)
     word2id = processor.get_vocab()
     config.vocab_size = len(word2id)
+    config.pad_id = word2id['<PAD>']
     train_features = convert_examples_to_features(examples=train_examples,
                                                   word2id=word2id,
                                                   label_list=config.label_list,
@@ -125,7 +126,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Chinese NER Task')
     parser.add_argument('--model', type=str, required=True,
-                        help='choose a model: bilstm, bilstm_crf, hmm')
+                        help='choose a model: bilstm, bilstm_crf, hmm,cnn')
     args = parser.parse_args()
 
     model_name = args.model
@@ -169,6 +170,15 @@ if __name__ == '__main__':
                        train_examples=train_examples,
                        dev_examples=dev_examples,
                        test_examples=test_examples)
+    elif args.model =='cnn':
+        bilstm_train_eval(config,import_model=import_model, train_examples=train_examples,
+                          dev_examples=dev_examples,
+                          test_examples=test_examples)
+    elif args.model =='transformer':
+        bilstm_train_eval(config,import_model=import_model, train_examples=train_examples,
+                          dev_examples=dev_examples,
+                          test_examples=test_examples)
+
 
 
 
